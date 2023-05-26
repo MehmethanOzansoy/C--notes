@@ -57,6 +57,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
 
             int int22 = int20+ int.Parse(str20);
             Console.WriteLine(int22);
+            
 
         }
     }
