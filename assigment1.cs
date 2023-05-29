@@ -26,7 +26,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
             ReverseCharacter instance = new ReverseCharacter();
             // instance.method1(5);
 
-            instance.getSumOfWords();
+            instance.getSumOfWords2();
 
 
         }
@@ -141,6 +141,32 @@ namespace MyApp // Note: actual namespace depends on the project name.
             Console.WriteLine("Cümledeki toplam harf sayısı: " + harfSayisi);
 
             Console.ReadLine();
+        }
+
+        public void getSumOfWords2()
+        {
+            Console.WriteLine("Bir cümle yazın:");
+            string cumle = Console.ReadLine();
+            char[] strArray = cumle.ToArray();
+            int kelimeSayisi = 1;
+            int harfsayısı = 0;
+
+            for (int i = 0; i < strArray.Length; i++)
+            {
+                if (strArray[i] != ' ')
+                {
+                    harfsayısı++;
+                }
+                else if(strArray[i] == ' ')
+                {
+                    kelimeSayisi ++;
+                }
+            }
+
+
+            Console.WriteLine("Kelime sayısı: " + kelimeSayisi);
+            Console.WriteLine("harf sayısı: " + harfsayısı);
+
         }
     }
 
