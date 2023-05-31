@@ -14,7 +14,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
         static void Main(string[] args)
         {
             // 1
-            ArrayList asalSayilar = new ArrayList();
+            ArrayList asalSayilar1 = new ArrayList();
             ArrayList asalOlmayanlar = new ArrayList();
             int input;
             System.Console.WriteLine("Please enter the 20 numbers");
@@ -28,7 +28,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 {
                     if (asalSayi(kullaniciGirisi))
                     {
-                        asalSayilar.Add(kullaniciGirisi);
+                        asalSayilar1.Add(kullaniciGirisi);
                     }
                     else
                     {
@@ -42,7 +42,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
             }
 
             Console.WriteLine("Asal Sayılar:");
-            foreach (int sayi in asalSayilar)
+            foreach (int sayi in asalSayilar1)
             {
                 Console.Write($"{sayi},");
             }
@@ -55,9 +55,63 @@ namespace MyApp // Note: actual namespace depends on the project name.
             }
 
 
-            ToSort(asalSayilar, asalOlmayanlar);
-            GetMemnbers(asalSayilar, asalOlmayanlar);
-            ListMean(asalSayilar, asalOlmayanlar);
+            ToSort(asalSayilar1, asalOlmayanlar);
+            GetMemnbers(asalSayilar1, asalOlmayanlar);
+            ListMean(asalSayilar1, asalOlmayanlar);
+
+
+            ArrayList asalSayilar = new ArrayList();
+            ArrayList asalOlmayanSayilar = new ArrayList();
+
+            Console.WriteLine("20 adet pozitif sayı girin:");
+
+            int girisSayisi = 0;
+            while (girisSayisi < 20)
+            {
+                Console.Write("Sayı {0}: ", girisSayisi + 1);
+                string giris = Console.ReadLine();
+
+                int sayi;
+                bool gecerliGiris = Int32.TryParse(giris, out sayi); // Sayısal girişi kontrol etme
+
+                if (gecerliGiris && sayi > 0) // Pozitif sayı kontrolü
+                {
+                    if (AsalMi(sayi))
+                        asalSayilar.Add(sayi);
+                    else
+                        asalOlmayanSayilar.Add(sayi);
+
+                    girisSayisi++;
+                }
+                else
+                {
+                    Console.WriteLine("Geçersiz giriş. Pozitif bir sayı girin.");
+                }
+            }
+
+            asalSayilar.Sort();
+            asalOlmayanSayilar.Sort();
+
+            Console.WriteLine("Asal sayılar: ");
+            for (int i = asalSayilar.Count - 1; i >= 0; i--)
+            {
+                Console.WriteLine(asalSayilar[i]);
+            }
+
+            Console.WriteLine("Asal olmayan sayılar: ");
+            for (int i = asalOlmayanSayilar.Count - 1; i >= 0; i--)
+            {
+                Console.WriteLine(asalOlmayanSayilar[i]);
+            }
+
+            Console.WriteLine("Asal sayıların eleman sayısı: {0}", asalSayilar.Count);
+            Console.WriteLine("Asal olmayan sayıların eleman sayısı: {0}", asalOlmayanSayilar.Count);
+
+            double asalOrtalama = OrtalamaBul(asalSayilar);
+            double asalOlmayanOrtalama = OrtalamaBul(asalOlmayanSayilar);
+
+            Console.WriteLine("Asal sayıların ortalaması: {0}", asalOrtalama);
+            Console.WriteLine("Asal olmayan sayıların ortalaması: {0}", asalOlmayanOrtalama);
 
 
 
@@ -154,6 +208,30 @@ namespace MyApp // Note: actual namespace depends on the project name.
 
             System.Console.WriteLine("1.dizinin ortalaması: " + mean1);
             System.Console.WriteLine("2.dizinin ortalaması: " + mean2);
+        }
+
+        static bool AsalMi(int sayi)
+        {
+            if (sayi < 2)
+                return false;
+
+            for (int i = 2; i <= Math.Sqrt(sayi); i++)
+            {
+                if (sayi % i == 0)
+                    return false;
+            }
+
+            return true;
+        }
+
+        static double OrtalamaBul(ArrayList liste)
+        {
+            double toplam = 0;
+            foreach (int sayi in liste)
+            {
+                toplam += sayi;
+            }
+            return toplam / liste.Count;
         }
     }
 }
