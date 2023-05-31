@@ -30,6 +30,20 @@ namespace MyApp // Note: actual namespace depends on the project name.
             {
                 System.Console.Write($"{item},");
             }
+
+            Console.WriteLine("Bir cümle girin: ");
+            string cumle = Console.ReadLine().ToLower(); // Küçük harfe dönüştürme
+
+            char[] sesliHarfler = { 'a', 'e', 'ı', 'i', 'o', 'ö', 'u', 'ü' };
+            char[] sesliHarfDizisi = cumle.Where(c => sesliHarfler.Contains(c)).ToArray();
+
+            Console.WriteLine("Sesli harfler: ");
+            Array.Sort(sesliHarfDizisi); // Diziyi sıralama
+
+            foreach (char harf in sesliHarfDizisi)
+            {
+                Console.WriteLine(harf);
+            }
         }
 
     }
