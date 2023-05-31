@@ -36,6 +36,35 @@ namespace MyApp // Note: actual namespace depends on the project name.
             System.Console.WriteLine("Ortalamaların toplamı: " + res);
 
 
+            int[] sayilar = new int[20];
+
+            Console.WriteLine("20 adet sayı girin:");
+
+            for (int i = 0; i < 20; i++)
+            {
+                Console.Write("Sayı {0}: ", i + 1);
+                sayilar[i] = Convert.ToInt32(Console.ReadLine());
+            }
+
+            Array.Sort(sayilar); // Sayıları sıralama
+
+            int[] enKucukUc = new int[3];
+            int[] enBuyukUc = new int[3];
+
+            Array.Copy(sayilar, enKucukUc, 3); // En küçük 3 sayıyı kopyalama
+            Array.Copy(sayilar, 17, enBuyukUc, 0, 3); // En büyük 3 sayıyı kopyalama
+
+            double enKucukUcOrtalama = OrtalamaBul(enKucukUc);
+            double enBuyukUcOrtalama = OrtalamaBul(enBuyukUc);
+            double toplamOrtalama = (enKucukUcOrtalama + enBuyukUcOrtalama) / 2;
+
+            Console.WriteLine("En küçük 3 sayı: {0}", string.Join(", ", enKucukUc));
+            Console.WriteLine("En küçük 3 sayı ortalaması: {0}", enKucukUcOrtalama);
+            Console.WriteLine("En büyük 3 sayı: {0}", string.Join(", ", enBuyukUc));
+            Console.WriteLine("En büyük 3 sayı ortalaması: {0}", enBuyukUcOrtalama);
+            Console.WriteLine("Toplam ortalama: {0}", toplamOrtalama);
+
+
 
         }
 
@@ -94,6 +123,16 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 sum = sum + (int)item;
             }
             return sum / max.Count;
+        }
+
+        public static double OrtalamaBul(int[] dizi)
+        {
+            int toplam = 0;
+            foreach (int sayi in dizi)
+            {
+                toplam += sayi;
+            }
+            return (double)toplam / dizi.Length;
         }
 
     }
